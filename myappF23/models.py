@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Student(models.Model):
     STUDENT_STATUS_CHOICES=[
         ('ER','Enrolled'),
@@ -16,16 +17,15 @@ class Student(models.Model):
     status=models.CharField(max_length=10,choices=STUDENT_STATUS_CHOICES,default='ER')
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-    
+        return f"{self.first_name} {self.last_name} Email:{self.email}"
+
+
 class Category(models.Model):
-    name=models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
-    
 
-    
 
 class Course(models.Model):
     title=models.CharField(max_length=200)
@@ -50,7 +50,8 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+
 class Instructor(models.Model):
     first_name=models.CharField(max_length=100)
     last_name=models.CharField(max_length=100)
@@ -59,4 +60,14 @@ class Instructor(models.Model):
 
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"Name: {self.first_name} {self.last_name}"
+
+class Order(models.Model):
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
+    ORDER_STATUS_CHOICES = [
+        (0, 'Order Confirmed'),
+        (1, 'Order Cancelled')
+    ]
+    order_status = models.IntegerField(choices=ORDER_STATUS_CHOICES,default='1')
+    order_date = models.DateField()
