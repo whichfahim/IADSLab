@@ -32,3 +32,24 @@ def details(request, category_no):
     heading = '<h1' + 'This is the details page' + '</h1>'
     response.write(heading)
     return response
+
+def detail(request, category_no):
+    # Get the category based on the category_no or return a 404 error if it doesn't exist
+    # category = get_object_or_404(Category, pk=category_no)
+
+    response = HttpResponse
+    # Get a list of courses for the specified category
+    courses = Course.objects.filter(categories_id=category_no)
+    # course_list = "<p>" + courses + "</p>"
+    # response.write(courses)
+    context = {
+        'category': category_no,
+        'courses': courses,
+    }
+
+    # response.write(courses)
+
+    return HttpResponse(courses)
+    # return response
+    # return render(request, 'myappF23/detail.html', context)
+
