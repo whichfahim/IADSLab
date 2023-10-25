@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>E-Learning WebApp!</title>
+</head>
+<body>
+    {% if category_list %}
+        <h2>List of Categories</h2>
+        <ol>
+            {% for category  in category_list %}
+                <li> {{ category.name}} </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <strong>There are no available categories!</strong>
+    {% endif %}
+{#    <p><a href="/about">About page</a></p>#}
+    <p><a href={% url 'myappF23:about' %}>About page</a></p>
+
+{#<p><a href="{% url ‘myapp:detail’ author.id %}">{{author.name }}</a></p>#}
+</body>
+</html>
