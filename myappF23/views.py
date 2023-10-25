@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponseNotFound
 from django.http import HttpResponse
 from .models import Category, Course, Student, Instructor
+from django.shortcuts import get_object_or_404
 
 def index(request):
     category_list = Category.objects.all().order_by('id')[:10]
@@ -26,38 +27,23 @@ def about(request):
     return response
 
 def detail(request, category_no):
-    # Get the category based on the category_no or return a 404 error if it doesn't exist
-    # category = get_object_or_404(Category, pk=category_no)
-    #
-    # response = HttpResponse()
-    # heading = '<h1' + 'This is the details page' + '</h1>'
-    # response.write(heading)
-    # # Get a list of courses for the specified category
-    # courses = Course.objects.filter(categories_id=category_no)
-    #
-    # for i in courses:
-    #     course = "<li>"+str(i)+"</li>"
-    #     response.write(course)
-    #
-    # return response
-    # category_list = Category.objects.all().order_by('id')[:10]
-    course_list = Course.objects.filter(categories_id=category_no)
     response = HttpResponse()
-    # category = Category.objects.filter(id=category_no)
-    category = Category.objects.get(id=1)
-    # print(str(article))
-    heading1 = '<h1>' + 'List of courses with category: ' + str(category) + '</h1>'
-    response.write(heading1)
 
-    for course in course_list:
-        list = '<li>' + str(course) + '</li>'
-        response.write(list)
+    if Course.objects.filter(categories_id=category_no).exists():
+        # at least one object satisfying query exists
+        course_list = Course.objects.filter(categories_id=category_no)
+        category = Category.objects.get(id=1)
+        heading1 = '<h1>' + 'List of courses with category: ' + str(category) + '</h1>'
+        response.write(heading1)
 
-    # course_list = Course.objects.all().order_by('-price')
-    # heading2 = '<h2>' + 'List of courses by price: ' + '</h2>'
-    # response.write(heading2)
-    # for course in course_list:
-    #     para = '<p>' + str(course) + '</p>'
-    #     response.write(para)
+        for course in course_list:
+            list = '<li>' + str(course) + '</li>'
+            response.write(list)
+    else:
+        # no object satisfying query exists
+        # response.write()
+        # return HttpResponseNotFound("This Category number does not exist.")
+        product = get_object_or_404(Course, categories_id=category_no)
+        return product
     return response
 
