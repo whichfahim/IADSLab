@@ -10,7 +10,12 @@
             {% for key, values in context.items %}
 {#                <tr>#}
                 <h2>{{key}}</h2>
-                <p>{{ values }}</p>
+                <ul>
+                    {% for i in values %}
+                        <li>{{ i }}</li>
+                    {% endfor %}
+                </ul>
+
 {#                {% for v in values.items %}#}
 {#                    <p>{{v}}</p>#}
 {#                    {% for x in v.items %}#}
