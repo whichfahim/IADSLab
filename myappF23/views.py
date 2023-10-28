@@ -33,24 +33,32 @@ def index(request):
 def about(request):
     return render(request, 'myappF23/about0.html')
 
+# def detail(request, category_no):
+#     response = HttpResponse()
+#
+#     if Course.objects.filter(categories_id=category_no).exists():
+#         # at least one object satisfying query exists
+#         course_list = Course.objects.filter(categories_id=category_no)
+#         category = Category.objects.get(id=1)
+#         heading1 = '<h1>' + 'List of courses with category: ' + str(category) + '</h1>'
+#         response.write(heading1)
+#
+#         for course in course_list:
+#             list = '<li>' + str(course) + '</li>'
+#             response.write(list)
+#     else:
+#         # no object satisfying query exists
+#         product = get_object_or_404(Course, categories_id=category_no)
+#         return product
+#     return response
+
 def detail(request, category_no):
-    response = HttpResponse()
+    # category_name = str(Category.objects.get(id=category_no))
+    course_list = Course.objects.filter(categories_id=category_no)
+    # context = {category_name:[]}
+    # for i in course_list:
+        # course = {2: "two"}
+        # context[category_name].append(str(i))
 
-    if Course.objects.filter(categories_id=category_no).exists():
-        # at least one object satisfying query exists
-        course_list = Course.objects.filter(categories_id=category_no)
-        category = Category.objects.get(id=1)
-        heading1 = '<h1>' + 'List of courses with category: ' + str(category) + '</h1>'
-        response.write(heading1)
-
-        for course in course_list:
-            list = '<li>' + str(course) + '</li>'
-            response.write(list)
-    else:
-        # no object satisfying query exists
-        # response.write()
-        # return HttpResponseNotFound("This Category number does not exist.")
-        product = get_object_or_404(Course, categories_id=category_no)
-        return product
-    return response
+    return render(request, 'myappF23/detail0.html',{'course_list': course_list})
 
