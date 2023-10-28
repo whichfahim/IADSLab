@@ -53,12 +53,12 @@ def about(request):
 #     return response
 
 def detail(request, category_no):
-    # category_name = str(Category.objects.get(id=category_no))
+    category_name = str(Category.objects.get(id=category_no))
     course_list = Course.objects.filter(categories_id=category_no)
-    # context = {category_name:[]}
-    # for i in course_list:
+    context = {category_name:[]}
+    for i in course_list:
         # course = {2: "two"}
-        # context[category_name].append(str(i))
+        context[category_name].append(str(i))
 
-    return render(request, 'myappF23/detail0.html',{'course_list': course_list})
+    return render(request, 'myappF23/detail0.html',{'context': context})
 

@@ -5,10 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-    <h2>List of Courses for Category: </h2>
+    <h2>List of Courses for Category:   </h2>
         <ol>
-            {% for course  in course_list %}
-                <li> {{ course}} </li>
+            {% for key, values in context.items %}
+{#                <tr>#}
+                <h2>{{key}}</h2>
+                <p>{{ values }}</p>
+{#                {% for v in values.items %}#}
+{#                    <p>{{v}}</p>#}
+{#                    {% for x in v.items %}#}
+{#                        <p>{{x}}</p>#}
+{##}
+{#                    {% endfor %}#}
+{#                {% endfor %}#}
+{#                </tr>#}
             {% endfor %}
         </ol>
         <p><a href={% url 'myappF23:index' %}>Back to home</a></p>
