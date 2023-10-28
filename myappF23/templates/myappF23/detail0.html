@@ -5,8 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-    <h2>This is the details page</h2>
-    <p>{{  course_list }}</p>
+    <h2>List of Courses for Category: </h2>
+        <ol>
+            {% for course  in course_list %}
+                <li> {{ course}} </li>
+            {% endfor %}
+        </ol>
+        <p><a href={% url 'myappF23:index' %}>Back to home</a></p>
+
 {#    {% for course in course_list %}#}
 {#        <li>{{ course}}</li>#}
 {#    {% endfor %}#}
