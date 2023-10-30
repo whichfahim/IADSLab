@@ -9,4 +9,6 @@ urlpatterns = [
     # path("/about", views.about, name='about')
     path('about/', views.about, name='about'),
     path('category/<int:category_no>/', views.detail, name='detail'),
+    path('instructor/<int:instructor_id>/', views.instructor, name='instructor'),
+
 ]

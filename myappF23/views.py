@@ -62,3 +62,7 @@ def detail(request, category_no):
 
     return render(request, 'myappF23/detail0.html',{'context': context})
 
+def instructor(request, instructor_id):
+    instructor_name = str(Instructor.objects.get(id=instructor_id))
+    context = {'Instructor':instructor_name}
+    return  render(request,'myappF23/instructor0.html',{'context':context})

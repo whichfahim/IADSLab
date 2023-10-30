@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructor</title>
+</head>
+<body>
+    <h1></h1>
+{% for key, values in context.items %}
+{#                <tr>#}
+                <h2>{{key}}</h2>
+                <p>{{ values }}</p>
+
+{#                {% for v in values.items %}#}
+{#                    <p>{{v}}</p>#}
+{#                    {% for x in v.items %}#}
+{#                        <p>{{x}}</p>#}
+{##}
+{#                    {% endfor %}#}
+{#                {% endfor %}#}
+{#                </tr>#}
+            {% endfor %}
+        </ol>
+</body>
+</html>
