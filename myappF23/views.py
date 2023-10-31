@@ -64,7 +64,15 @@ def detail(request, category_no):
 
 def instructor(request, instructor_id):
     instructor_name = str(Instructor.objects.get(id=instructor_id))
-    courses = Course.objects.filter(instructor_id=instructor_id)
+    course_list = Course.objects.filter(instructor_id=instructor_id)
+    students = Student.objects.filter(instructors=instructor_id)
     context = {'Instructor':instructor_name}
-    context.update({'Courses': courses})
+    context.update({'Courses':[]})
+    context.update({'Students':[]})
+    for i in course_list:
+        # course = {2: "two"}
+        context['Courses'].append(str(i))
+    # context.update({'Courses': courses})
+    for i in students:
+        context['Students'].append(str(i))
     return  render(request,'myappF23/instructor0.html',{'context':context})
