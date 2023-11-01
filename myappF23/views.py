@@ -22,7 +22,7 @@ from django.shortcuts import render
 
 def index(request):
     category_list = Category.objects.all().order_by('id')[:10]
-    return render(request, 'myappF23/index0.html', {'category_list': category_list})
+    return render(request, 'myappF23/index.html', {'category_list': category_list})
 
 # def about(request):
 #     response = HttpResponse()
@@ -31,7 +31,7 @@ def index(request):
 #     return response
 
 def about(request):
-    return render(request, 'myappF23/about0.html')
+    return render(request, 'myappF23/about.html')
 
 # def detail(request, category_no):
 #     response = HttpResponse()
@@ -60,7 +60,7 @@ def detail(request, category_no):
         # course = {2: "two"}
         context[category_name].append(str(i))
 
-    return render(request, 'myappF23/detail0.html',{'context': context})
+    return render(request, 'myappF23/detail.html',{'context': context})
 
 def instructor(request, instructor_id):
     instructor_name = str(Instructor.objects.get(id=instructor_id))

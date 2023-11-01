@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'myappF23/base.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Details{% endblock %}</title>
+</head>
+<body>
+    {% block body_block %}
+       <h2>List of Courses for Category: </h2>
+
+        <ol>
+                     {% for key, values in context.items %}
+
+                         <h2>{{ key }}</h2>
+
+            <ul>
+                                   {% for i in values %}
+
+                <li>{{ i }}</li>
+                                  {% endfor %}
+                              </ul>
+
+
+                     {% endfor %}
+                  </ol>
+    {% endblock %}
+</body>
+</html>
