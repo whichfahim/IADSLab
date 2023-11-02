@@ -1,13 +1,30 @@
+# from django.contrib.sites import requests
 from django.http import HttpResponse
 from .models import Category, Course, Student, Instructor
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-
+import requests
 
 
 def index(request):
-    category_list = Category.objects.all().order_by('id')[:10]
-    return render(request, 'myappF23/index.html', {'category_list': category_list})
+    data = {}
+    data["crypto_data"] = get_crypto_data()
+    return render(request, "myappF23/index.html", context=data)
+
+
+# return the data received from api as json object
+def get_crypto_data():
+    # api_url = "https://api.coinmarketcap.com/v1/ticker/?limit=10"
+    api_url = "http://api.coinlayer.com/live?access_key=cc193be204150f270335cb8652f14683"
+    try:
+        data = requests.get(api_url).json()
+
+    except Exception as e:
+        print(e)
+        data = dict()
+    rates = data['rates']
+    return rates
+
 
 
 def about(request):

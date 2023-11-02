@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-{% extends 'myappF23/base.html' %}
+{#{% extends 'myappF23/base.html' %}#}
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>E-learning</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
 </head>
 <body>
     {% block body_block %}
-        {% if category_list %}
-            <h2>List of Categories</h2>
-            <ol>
-                {% for category  in category_list %}
-    {#                <li> {{ category.name}} </li>#}
-                    <li><a href={% url 'myappF23:detail' category.id %}>{{ category.name}}</a></li>
-                {% endfor %}
-            </ol>
-        {% else %}
-            <strong>There are no available categories!</strong>
-        {% endif %}
-    {#    <p><a href="/about">About page</a></p>#}
-{#        <p><a href={% url 'myappF23:about' %}>About page</a></p>#}
+         <div class="alert alert-dark" role="alert">
+            <span style="font-size:30px;">Bitcoin Latest Price</span> <span style="font-size:15px;">by <a href="http://ThePythonDjango.Com" target="_blank">ThePythonDjango.Com</a></span>
+        </div>
+            {% for key,value in crypto_data.items %}
+            <div class="list-group-item list-group-item-{% if coin.percent_change_1h.0 == '-'%}danger{% else %}success{% endif %}">
+                <div class="row">
+                    <div class="col-md-3">
+                        {{key}}
+                    </div>
+                    <div class="col-md-3">
+                        {{value}}
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     {% endblock %}
 </body>
 </html>
