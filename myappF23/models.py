@@ -17,7 +17,7 @@ class Student(models.Model):
     status=models.CharField(max_length=10,choices=STUDENT_STATUS_CHOICES,default='ER')
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} Email:{self.email}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class Category(models.Model):

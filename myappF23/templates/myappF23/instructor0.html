@@ -8,11 +8,11 @@
     <h1></h1>
 {% for key, values in context.items %}
                 <h2>{{key}}</h2>
-                <p>{{ values }}</p>
+{#                <p>{{ values }}</p>#}
 {#    <ul>#}
-{#                    {% for i in values %}#}
-{#                        <li>{{ i }}</li>#}
-{#                    {% endfor %}#}
+                    {% for i in values %}
+                        <li>{{ i }} </li>
+                    {% endfor %}
 {#                </ul>#}
             {% endfor %}
         </ol>
