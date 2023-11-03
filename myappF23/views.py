@@ -24,7 +24,7 @@ from .serializers import CategorySerializer
 #     return response
 
 @api_view(['GET'])
-def viewCategory(request):
+def viewCategories(request):
     category = Category.objects.all()
     serializer = CategorySerializer(instance=category, data=request.data)
     if serializer.is_valid():
