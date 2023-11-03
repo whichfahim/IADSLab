@@ -26,28 +26,28 @@ from .serializers import CategorySerializer
 @api_view(['GET'])
 def viewCategories(request):
     category = Category.objects.all()
-    serializer = CategorySerializer(instance=category, data=request.data)
+    serializer = CategorySerializer(data=category, many=True)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
 
 @api_view(['PUT'])
-def updateCategory(request, category_id):
+def updateCategory(request, category_no):
     try:
-        category = Category.objects.get(id=category_id)
+        category = Category.objects.get(id=category_no)
     except Category.DoesNotExist:
         return Response({"message": "Category does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = CategorySerializer(instance=category, data=request.data)
+    serializer = CategorySerializer(data=category, many=False)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
-def deleteCategory(request, category_id):
+def deleteCategory(request, category_no):
     try:
-        category = Category.objects.get(id=category_id)
+        category = Category.objects.get(id=category_no)
     except Category.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
