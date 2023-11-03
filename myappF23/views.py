@@ -1,7 +1,10 @@
-from django.http import HttpResponse
+from rest_framework import status
 from .models import Category, Course, Student, Instructor
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializers import CategorySerializer
 
 # def index(request):
 #     category_list = Category.objects.all().order_by('id')[:10]
@@ -19,6 +22,38 @@ from django.shortcuts import render
 #         para = '<p>'+ str(course) + '</p>'
 #         response.write(para)
 #     return response
+
+@api_view(['GET'])
+def viewCategory(request):
+    category = Category.objects.all()
+    serializer = CategorySerializer(instance=category, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateCategory(request, category_id):
+    try:
+        category = Category.objects.get(id=category_id)
+    except Category.DoesNotExist:
+        return Response({"message": "Category does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = CategorySerializer(instance=category, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def deleteCategory(request, category_id):
+    try:
+        category = Category.objects.get(id=category_id)
+    except Category.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    category.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 def index(request):
     category_list = Category.objects.all().order_by('id')[:10]
