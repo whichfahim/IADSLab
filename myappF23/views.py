@@ -11,14 +11,14 @@ def index(request):
 
 
 def about(request):
-    course = Course.objects.filter(id=1)
-    context = {'Title':str(course)}
-    context.update({'Students':[]})
-    students = Course.objects.get()
-    for i in students:
-        context['Students'].append(str(i))
+    # course = Course.objects.filter(id=1)
+    # context = {'Title':str(course)}
+    # context.update({'Students':[]})
+    # students = Course.objects.get()
+    # for i in students:
+    #     context['Students'].append(str(i))
 
-    return render(request, 'myappF23/about.html',context=context)
+    return render(request, 'myappF23/about.html')
 
 
 def detail(request, category_no):
