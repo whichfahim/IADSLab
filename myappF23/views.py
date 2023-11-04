@@ -1,5 +1,5 @@
 from rest_framework import status
-from .models import Category, Course, Student, Instructor
+from .models import Category, Course, User, Instructor
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from rest_framework.response import Response
@@ -22,6 +22,26 @@ from .serializers import CategorySerializer
 #         para = '<p>'+ str(course) + '</p>'
 #         response.write(para)
 #     return response
+@api_view(['PUT'])
+def addUser(request):
+    if request.method == 'PUT':
+        # Assuming request.data contains the necessary fields
+        user_data = request.data
+
+        # Creating a new User instance and saving it
+        user = User(
+            name=user_data.get('name'),
+            email=user_data.get('email'),
+            age=user_data.get('age'),
+            gender=user_data.get('gender'),
+            contact_no=user_data.get('phone'),  # Assuming the field name is 'phone' in the request
+            country=user_data.get('country')
+        )
+        user.save()
+
+        return Response({'message': 'Data updated successfully'})
+
+    return Response({'message': 'Invalid request'})
 
 @api_view(['GET'])
 def viewCategories(request):
