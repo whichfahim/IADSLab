@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from myappF23.models import Category, User, Student, Instructor
+from myappF23.models import Category, AppUser, Student, Instructor
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
-class UserSerializer(serializers.ModelSerializer):
+class AppUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model: User
+        model = AppUser
         fields = '__all__'

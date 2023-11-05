@@ -1,10 +1,10 @@
 from rest_framework import status
-from .models import Category, Course, User, Instructor
+from .models import Category, Course, AppUser, Instructor
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import CategorySerializer
+from .serializer import CategorySerializer, AppUserSerializer
 
 # def index(request):
 #     category_list = Category.objects.all().order_by('id')[:10]
@@ -22,14 +22,14 @@ from .serializers import CategorySerializer
 #         para = '<p>'+ str(course) + '</p>'
 #         response.write(para)
 #     return response
-@api_view(['PUT'])
-def addUser(request):
+@api_view(['PUT','POST'])
+def addAppUser(request):
     if request.method == 'PUT':
         # Assuming request.data contains the necessary fields
         user_data = request.data
 
         # Creating a new User instance and saving it
-        user = User(
+        appuser = AppUser(
             name=user_data.get('name'),
             email=user_data.get('email'),
             age=user_data.get('age'),
@@ -37,16 +37,16 @@ def addUser(request):
             contact_no=user_data.get('phone'),  # Assuming the field name is 'phone' in the request
             country=user_data.get('country')
         )
-        user.save()
+        appuser.save()
 
         return Response({'message': 'Data updated successfully'})
 
     return Response({'message': 'Invalid request'})
 
 @api_view(['GET'])
-def viewCategories(request):
-    category = Category.objects.all()
-    serializer = CategorySerializer(data=category, many=True)
+def viewAppUser(request):
+    appuser = AppUser.objects.all()
+    serializer = AppUserSerializer(data=appuser, many=True)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
