@@ -5,12 +5,11 @@ from django.urls import path
 app_name = 'myappF23'
 
 urlpatterns = [
-    path(r'', views.index, name='index'),
-    # path("/about", views.about, name='about')
+    path('', views.about, name='about'),
     path('addAppUser/', views.addAppUser, name='addAppUser'),
-    #path('addUser/', views.about, name='about'),
     path('viewAppUser/', views.viewAppUser, name='viewAppUser'),
     #path('category/delete/<int:category_no>/', views.deleteCategory, name ='deleteCategory'),
     #path('category/update/<int:category_no>/', views.updateCategory, name ='updateCategory'),
-    path('category/<int:category_no>/', views.detail, name='detail'),
+    path('instructor/instructorProfile/',views.instructorProfile, name='instructorProfile'),
+    path('instructor/getInstructor/<int:ins_no>/',views.getInstructor, name='getInstructor'),
 ]

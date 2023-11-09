@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class AppUser(models.Model):
     name=models.CharField(max_length=100)
@@ -63,14 +62,19 @@ class Course(models.Model):
 
 
 class Instructor(models.Model):
+    user_name=models.CharField(max_length=50)
     first_name=models.CharField(max_length=100)
     last_name=models.CharField(max_length=100)
+    password=models.CharField(max_length=50)
     bio=models.TextField()
-    students = models.ManyToManyField(Student, blank=True, related_name='instructors')
+    country=models.CharField(max_length=50)
+    language=models.CharField(max_length=50)
+    email=models.CharField(max_length=50)
 
 
     def __str__(self):
         return f"Name: {self.first_name} {self.last_name}"
+
 
 class Order(models.Model):
     course = models.ForeignKey('Course', on_delete=models.CASCADE)

@@ -12,3 +12,8 @@ class AppUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppUser
         fields = '__all__'
+
+class InstructorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Instructor
+        fields= '__all__'
