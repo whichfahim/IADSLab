@@ -13,7 +13,7 @@
             <ol>
                 {% for category  in category_list %}
     {#                <li> {{ category.name}} </li>#}
-                    <li><a href={% url 'myappF23:detail' category.id %}>{{ category.name}}</a></li>
+                    <li><a href={% url 'myappF23:detail' category.id %}>{{ category.name }}</a></li>
                 {% endfor %}
             </ol>
         {% else %}

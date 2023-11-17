@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 
@@ -36,6 +36,7 @@ class Course(models.Model):
     start_date=models.DateField()
     end_date=models.DateField()
     price=models.DecimalField(max_digits=10,decimal_places=2)
+    interested=models.PositiveIntegerField(default=0)
 
 
     #level choices in Course
@@ -71,3 +72,12 @@ class Order(models.Model):
     ]
     order_status = models.IntegerField(choices=ORDER_STATUS_CHOICES,default='1')
     order_date = models.DateField()
+    order_price = models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    levels = models.PositiveIntegerField(default=1)
+
+    def discount(self):
+        self.order_price = self.order_price * .9
+
+
+
+

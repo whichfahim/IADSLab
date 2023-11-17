@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends 'myappF23/base.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+    {% block body_block %}
+        <ol>
+            {% for i in courselist %}
+                <li>{{ i }}</li>
+            {% endfor %}
+        </ol>
+    {% endblock %}
+</body>
+</html>

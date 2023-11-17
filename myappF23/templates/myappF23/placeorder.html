@@ -1,0 +1,25 @@
+{% extends 'myappF23/base.html' %}
+{% load static %}
+
+{% block body_block %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Order</title>
+    </head>
+    <body>
+    <ul>
+        {% for course in courlist %}
+           <li>{{ course }}</li>
+        {% endfor %}
+    <form action = "" method = "post">
+        {% csrf_token %}
+        {{form }}
+        <input type="submit" value=Submit>
+    </form>
+
+    </ul>
+
+    </body>
+    </html>
+{% endblock %}
